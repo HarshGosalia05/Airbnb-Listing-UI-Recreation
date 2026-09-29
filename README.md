@@ -1,157 +1,104 @@
-<div align="center">
+# Airbnb Listing Clone
 
-# AI Website Cloner Template
+A pixel-accurate rebuild of an Airbnb listing page, **"Romantic Jacuzzi 1BHK Candolim | Mirashya UG10"**, in Next.js 16, React 19 and Tailwind CSS v4.
 
-### Clone any website with one command
+Reference page: https://airbnb-clone-umber-two.vercel.app/
 
-Give your AI coding agent a URL and watch it recreate the website as a clean Next.js app.
+## Features
 
-**Best results with [Claude Code](https://docs.anthropic.com/en/docs/claude-code) + Opus 5.5. Also supports Codex, Cursor, and OpenCode.**
+- **Listing page:** header with search pill, title with Share/Save, a 5-photo hero grid, overview, "Where you'll sleep", amenities, a two-month availability calendar, a sticky booking card, reviews with rating breakdown, a location map, host profile, "Things to know" and a "More stays nearby" carousel.
+- **Sticky section nav:** appears once you scroll past the photos and underlines the section in view (Photos / Amenities / Reviews / Location).
+- **Photo tour:** 9 rooms and 43 photos, with category thumbnails and sticky room titles. Opens from the gallery and is linkable at `/?modal=PHOTO_TOUR_SCROLLABLE`.
+- **Lightbox:** full-screen viewer with a room title, a `n / 43` counter, prev/next buttons and arrow-key navigation.
+- **Amenities modal:** all 12 groups, including items marked unavailable.
+- **Interactions:** the calendar pages through months and lets you select or clear dates. "Show more" expands long text, the carousel pages, Share copies the link and Save toggles, with a toast for each.
+- **Responsive:** desktop-first breakpoints at 1128px and 743px, matching the reference.
+- **Accessible:**
+  - keyboard focus ring (keyboard only)
+  - dialogs that move, trap and return focus, with the page behind made inert
+  - keyboard-operable calendar, and ARIA state on toggles
+  - `prefers-reduced-motion` honoured, including JS-driven scrolling
 
-[![Use this template](https://img.shields.io/badge/Use_this_template-Create_your_copy-2ea44f?style=for-the-badge&logo=github&logoColor=white)](https://github.com/JCodesMore/ai-website-cloner-template/generate) [![Discord](https://img.shields.io/badge/Join_the_community-Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/hrTSX5yTpB)
+## Getting started
 
-[Quick Start](#quick-start) · [Watch Demo](#demo) · [Supported Platforms](#supported-platforms)
+Requires Node.js 24 (see `.nvmrc`).
 
-<a href="https://github.com/JCodesMore/ai-website-cloner-template/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT License" /></a> <a href="https://github.com/JCodesMore/ai-website-cloner-template"><img src="https://img.shields.io/github/stars/JCodesMore/ai-website-cloner-template?style=flat" alt="Stars" /></a> <img src="https://img.shields.io/endpoint?url=https://gittokens.rsamf.com/badge/JCodesMore/ai-website-cloner-template" alt="tokens" />
-
-  <a href="https://trendshift.io/repositories/24302?utm_source=repository-badge&amp;utm_medium=badge&amp;utm_campaign=badge-repository-24302" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/repositories/24302" alt="JCodesMore%2Fai-website-cloner-template | Trendshift" width="250" height="55" /></a> <a href="https://www.star-history.com/jcodesmore/ai-website-cloner-template/"><picture><source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/badge?repo=JCodesMore/ai-website-cloner-template&amp;theme=dark" /><source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/badge?repo=JCodesMore/ai-website-cloner-template" /><img alt="Star History Global Rank" src="https://api.star-history.com/badge?repo=JCodesMore/ai-website-cloner-template" width="216" height="55" /></picture></a>
-
-</div>
-
----
-
-## Demo
-
-[![Watch the demo](docs/design-references/comparison.png)](https://youtu.be/O669pVZ_qr0)
-
-> Click the image above to watch the full demo on YouTube.
-
-## Quick Start
-
-### 1. Set up your project
-
-**Recommended: ask your agent.** Paste this into Codex, Claude Code, or your coding agent:
-
-```text
-Set up https://github.com/JCodesMore/ai-website-cloner-template
-as a standalone project in a new folder on my computer.
-Ask me where to put it. Clone the repository, remove its origin remote,
-install dependencies, and run npm run check. Leave it ready for me
-to clone a website.
+```bash
+npm install
+npm run dev        # http://localhost:3000
 ```
 
-**Or create your own GitHub repository:**
+| Command | What it does |
+|---|---|
+| `npm run dev` | Development server |
+| `npm run build` / `npm start` | Production build / server |
+| `npm run lint` | ESLint |
+| `npm run typecheck` | TypeScript (`tsc --noEmit`) |
+| `npm run check` | Lint, typecheck and build together |
 
-[![Use this template](https://img.shields.io/badge/Use_this_template-Create_your_copy-2ea44f?style=for-the-badge&logo=github&logoColor=white)](https://github.com/JCodesMore/ai-website-cloner-template/generate)
-
-Give it a name and click **Create repository**. Then give your agent the new repository's link and ask it to clone it onto your computer, install dependencies, and run `npm run check`.
-
-### 2. Clone a website
-
-Open the project in your agent with browser access enabled. In Claude Code or Cursor, run:
-
-```text
-/clone-website https://example.com
-```
-
-Replace the URL with the website you want to recreate. Once it's built, ask your agent for any changes you want.
-
-## Supported Platforms
-
-| Agent                                                         | Status                     |
-| ------------------------------------------------------------- | -------------------------- |
-| [Claude Code](https://docs.anthropic.com/en/docs/claude-code) | **Recommended** — Opus 5.5 |
-| [Codex CLI](https://github.com/openai/codex)                  | Supported                  |
-| [OpenCode](https://opencode.ai/)                              | Supported                  |
-| [Cursor](https://cursor.com/)                                 | Supported                  |
-
-## Prerequisites
-
-- [Node.js](https://nodejs.org/) 24+
-- An AI coding agent (see [Supported Platforms](#supported-platforms))
-
-## Tech Stack
-
-- **Next.js 16** — App Router, React 19, TypeScript strict
-- **shadcn/ui** — Radix primitives + Tailwind CSS v4
-- **Tailwind CSS v4** — oklch design tokens
-- **Lucide React** — default icons (replaced by extracted SVGs during cloning)
-
-## How It Works
-
-The `/clone-website` skill runs a multi-phase pipeline:
-
-1. **Reconnaissance** — screenshots, design token extraction, interaction sweep (scroll, click, hover, responsive)
-2. **Foundation** — updates fonts, colors, globals, downloads all assets
-3. **Component Specs** — writes detailed spec files (`docs/research/components/`) with exact computed CSS values, states, behaviors, and content
-4. **Parallel Build** — dispatches builder agents in git worktrees, one per section/component
-5. **Assembly & QA** — merges worktrees, wires up the page, runs visual diff against the original
-
-Each builder agent receives the full component specification inline — exact `getComputedStyle()` values, interaction models, multi-state content, responsive breakpoints, and asset paths. No guessing.
-
-## Use Cases
-
-- **Platform migration** — rebuild a site you own from WordPress/Webflow/Squarespace into a modern Next.js codebase
-- **Lost source code** — your site is live but the repo is gone, the developer left, or the stack is legacy. Get the code back in a modern format
-- **Learning** — deconstruct how production sites achieve specific layouts, animations, and responsive behavior by working with real code
-
-## Not Intended For
-
-- **Phishing or impersonation** — this project must not be used for deceptive purposes, impersonation, or any activity that breaks the law.
-- **Passing off someone's design as your own** — logos, brand assets, and original copy belong to their owners.
-- **Violating terms of service** — some sites explicitly prohibit scraping or reproduction. Check first.
-
-## Project Structure
+## Project structure
 
 ```
 src/
-  app/              # Next.js routes
-  components/       # React components
-    ui/             # shadcn/ui primitives
-    icons.tsx       # Extracted SVG icons
-  lib/utils.ts      # cn() utility
-  types/            # TypeScript interfaces
-  hooks/            # Custom React hooks
-public/
-  images/           # Downloaded images from target
-  videos/           # Downloaded videos from target
-  seo/              # Favicons, OG images
+  app/
+    layout.tsx            # font (Airbnb Cereal VF via next/font/local) + metadata
+    page.tsx              # renders <ListingPage />
+    globals.css           # Tailwind v4 + design tokens (ink, rausch, grey100…)
+  components/listing/
+    ListingPage.tsx       # assembles every section and overlay
+    ListingUIProvider.tsx # shared UI state: tour, lightbox, modal, toast, saved
+    data.ts               # hero photos + photo-tour rooms
+    icons.tsx             # icons shared across sections
+    SiteHeader, StickyNav, ListingTitle, PhotoGallery, ListingOverview,
+    DescriptionAndSleep, AmenitiesPreview, AvailabilityCalendar, BookingSidebar,
+    ReviewsSummary, ReviewsList, LocationSection, HostSection, ThingsToKnow,
+    MoreStaysNearby, PhotoTourModal, Lightbox, AmenitiesModal, Toast (.tsx)
+  hooks/useDialogFocus.ts # dialog initial focus + Tab trap
+  types/listing.ts
+public/images/listing/    # all 68 listing images
+tools/                    # extraction + QA pipeline (see tools/README.md)
+.claude/agents/           # sub-agent configs
+.agents/skills/           # cloning skill
 docs/
-  research/         # Extraction output & component specs
-  design-references/ # Screenshots
-.agents/skills/
-  clone-website/    # Canonical skill and inspection reference
-.claude/commands/
-  clone-website.md  # Thin Claude Code bridge
-AGENTS.md           # Agent instructions (single source of truth)
-CLAUDE.md           # Claude Code config (imports AGENTS.md)
+  research/               # page topology, behaviour notes, one spec per component
+  design-references/      # saved captures of the reference + per-section screenshots
 ```
 
-## Commands
+## AI workflow artifacts
 
-```bash
-npm run dev    # Start dev server
-npm run build  # Production build
-npm run lint   # ESLint check
-npm run typecheck # TypeScript check
-npm run check  # Run lint + typecheck + build
-```
+| Path | What it is |
+|---|---|
+| `.agents/skills/clone-website/` | The cloning **skill** that drove the build (from the starter template, © JCodesMore, MIT). `.claude/commands/clone-website.md` is the Claude Code slash-command bridge to it. |
+| `.claude/agents/section-builder.md` | **Sub-agent:** builds components from their specs. 8 ran in parallel. |
+| `.claude/agents/code-reviewer.md` | **Sub-agent:** reviews correctness, structure and accessibility. Report and resolutions: `docs/reviews/code-review.md`. |
+| `.claude/agents/visual-qa.md` | **Sub-agent:** pixel diff plus behaviour checks against the reference. Report: `docs/reviews/visual-qa.md`. |
+| `tools/` | Extraction and QA scripts the agents wrote and ran (Playwright + Pillow). See `tools/README.md`. |
+| `docs/research/` | Page topology, behaviour notes and the 18 component specs the builders worked from. |
+| `docs/PROMPTS.md` | The prompt sequence used during development. |
 
-### If using docker
+## How it was built
 
-```bash
-docker compose up app --build # build and run the app
-docker compose up dev --build # run the app in dev mode on port 3001
-```
+I built this with AI coding agents (Claude Code), directing them through each stage:
 
-## Agent Support
+1. **Capture.** The reference sits behind Vercel's bot checkpoint, which blocks automated browsers. So I saved the page (and its open photo-tour state) with SingleFile and took full-page screenshots.
+2. **Extraction.** An agent rendered the saved pages in headless Chromium (Playwright) and recovered:
+   - the embedded images and variable font
+   - the original stylesheet, including hover, active, transition and breakpoint rules
+   - the DOM content and the measured size of every element at 1440px and 390px
+3. **Specs.** Each section got a spec file in `docs/research/components/` holding the exact CSS, markup, sizes and behaviours. Interactions the saved page couldn't show, because its JavaScript was stripped, are marked as inferred in `docs/research/BEHAVIORS.md`.
+4. **Foundation.** Design tokens, the font, shared icons, typed data and the shared UI-state provider were written before any sections.
+5. **Parallel build.** 8 agents built the 18 components at the same time, each working from its own spec and verifying with `tsc` and ESLint.
+6. **Visual QA.** The finished page was screenshotted and diffed pixel-by-pixel against the reference at 1440px and 390px. Page heights match exactly (6259px and 8675px), and the remaining differences were fixed, such as line-height quirks in the photo tour.
+7. **Review and accessibility.** The `code-reviewer` sub-agent audited the code. Its accessibility findings were fixed without changing what a mouse user sees:
+   - keyboard-only focus ring
+   - keyboard-operable calendar days
+   - modal dialogs that move, trap and return focus, with an `inert` background
+   - ARIA state on toggles
+   - reduced-motion-aware scrolling
 
-The project keeps one portable Agent Skill at `.agents/skills/clone-website/`. Codex, Cursor, and OpenCode read it directly. Claude Code uses the small command bridge at `.claude/commands/clone-website.md` so `/clone-website` and its arguments continue to work without exposing a duplicate skill to the other agents.
+   The `visual-qa` sub-agent then re-verified fidelity and behaviour.
 
-## Star History
+## Notes
 
-![Star History Chart](docs/assets/star-history.png)
-
-## License
-
-MIT
+- The project started from an MIT-licensed Next.js + shadcn/ui starter scaffold (© JCodesMore). All listing code, assets, research and documentation are specific to this project. See `LICENSE`.
+- Photos, the Airbnb name and logo, and the Airbnb Cereal font belong to their respective owners and are used here for educational purposes only.

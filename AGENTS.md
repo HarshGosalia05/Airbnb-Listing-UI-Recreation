@@ -8,65 +8,43 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
-# Website Reverse-Engineer Template
+# Airbnb Listing Clone — Agent Guide
 
-## What This Is
-A reusable template for reverse-engineering any website into a clean, modern Next.js codebase using AI coding agents. The Next.js + shadcn/ui + Tailwind v4 base is pre-scaffolded — just run `/clone-website <url1> [<url2> ...]`.
+A single-page, pixel-accurate rebuild of an Airbnb listing ("Romantic Jacuzzi 1BHK Candolim | Mirashya UG10") in Next.js. The reference is https://airbnb-clone-umber-two.vercel.app/.
 
-## Tech Stack
-- **Framework:** Next.js 16 (App Router, React 19, TypeScript strict)
-- **UI:** shadcn/ui (Radix primitives, Tailwind CSS v4, `cn()` utility)
-- **Icons:** Lucide React (default — will be replaced/supplemented by extracted SVGs)
-- **Styling:** Tailwind CSS v4 with oklch design tokens
-- **Deployment:** Vercel
+## Stack
+- Next.js 16 (App Router, Turbopack), React 19, TypeScript strict
+- Tailwind CSS v4 (tokens in `src/app/globals.css`), shadcn/ui base, `cn()` in `src/lib/utils.ts`
+- Airbnb Cereal VF loaded with `next/font/local` from `src/app/fonts/`
 
 ## Commands
-- `npm run dev` — Start dev server
-- `npm run build` — Production build
-- `npm run lint` — ESLint check
-- `npm run typecheck` — TypeScript check
-- `npm run check` — Run lint + typecheck + build
+- `npm run dev`: dev server at http://localhost:3000
+- `npm run check`: lint, typecheck and production build. Run this before finishing any change.
 
-## Code Style
-- TypeScript strict mode, no `any`
-- Named exports, PascalCase components, camelCase utils
-- Tailwind utility classes, no inline styles
-- 2-space indentation
-- Responsive: mobile-first
+## Layout of the code
+- `src/app/page.tsx` renders `ListingPage` from `src/components/listing/ListingPage.tsx`, which assembles every section.
+- `src/components/listing/`: one file per section (header, sticky nav, gallery, overview, calendar, booking card, reviews, location, host, things to know, more stays) and per overlay (photo tour, lightbox, amenities modal, toast).
+- `ListingUIProvider.tsx`: client context for shared UI state (photo tour + `?modal=PHOTO_TOUR_SCROLLABLE`, lightbox index, amenities modal, toast, saved/share).
+- `data.ts`: image base path, hero photos and the photo-tour rooms (43 photos). `icons.tsx`: icons shared across sections.
+- `src/types/listing.ts`: content types. `public/images/listing/`: every image.
+- `docs/research/`: page topology, behaviour notes and one spec per component (the original CSS, measured sizes and markup). `docs/design-references/`: saved captures of the reference page and per-section screenshots.
 
-## Design Principles
-- **Pixel-perfect emulation** — match the target's spacing, colors, typography exactly
-- **No personal aesthetic changes during emulation phase** — match 1:1 first, customize later
-- **Real content** — use actual text and assets from the target site, not placeholders
-- **Beauty-first** — every pixel matters
+## Agents, skill and tools
+- `.claude/agents/section-builder.md`: build or rebuild components from their specs. Run several in parallel on disjoint files.
+- `.claude/agents/code-reviewer.md`: read-only review (correctness, structure, accessibility). Run it after changes.
+- `.claude/agents/visual-qa.md`: build, screenshot and pixel-diff against the reference, then check behaviours. Run it after any visual change.
+- `.agents/skills/clone-website/`: the cloning workflow skill (`/clone-website`) used to produce the first build.
+- `tools/`: the extraction and QA pipeline (see `tools/README.md`). Put scratch output in `tools/.out/` only.
 
-## Project Structure
-```
-src/
-  app/              # Next.js routes
-  components/       # React components
-    ui/             # shadcn/ui primitives
-    icons.tsx       # Extracted SVG icons as React components
-  lib/
-    utils.ts        # cn() utility (shadcn)
-  types/            # TypeScript interfaces
-  hooks/            # Custom React hooks
-public/
-  images/           # Downloaded images from target site
-  videos/           # Downloaded videos from target site
-  seo/              # Favicons, OG images, webmanifest
-docs/
-  research/         # Inspection output (design tokens, components, layout)
-  design-references/ # Screenshots and visual references
-scripts/            # Asset download scripts
-.agents/
-  skills/
-    clone-website/  # Canonical cross-agent cloning workflow
-.claude/
-  commands/
-    clone-website.md # Thin Claude Code invocation bridge
-```
+## Accessibility rules
+- Keep the reference look for mouse users. Keyboard affordances go through `:focus-visible` (global outline) only.
+- Overlays use `useDialogFocus` (`src/hooks/`) for initial focus and the Tab trap. `ListingUIProvider` returns focus to the trigger. Closed overlays and the page behind an open one are `inert`.
+- Interactive elements must be real `<button>`/`<a>` elements. Reset the button chrome with classes rather than using clickable divs.
 
-## Agent Workflow
-- Edit `.agents/skills/clone-website/` for cloning-workflow changes. It is the canonical skill used by Codex, Cursor, and OpenCode.
-- Keep `.claude/commands/clone-website.md` as a thin Claude Code bridge to the canonical skill; do not duplicate the workflow there.
+## Conventions
+- Match the reference exactly. Take values from the component spec in `docs/research/components/`, not from guesses.
+- Tailwind utilities only, with arbitrary values where needed (`text-[22px]`, `leading-[26px]`). Use explicit pixel sizes rather than `text-sm`/`text-base`, which also set a line-height.
+- Breakpoints are desktop-first, like the reference: `max-[1128px]:` and `max-[743px]:`.
+- Animate `transform` with arbitrary properties (`[transform:scale(.98)]`); Tailwind v4's `scale-*`/`translate-*` set separate CSS properties.
+- `<button>` elements keep the browser's `line-height: normal` in the reference, so add `leading-[normal]`.
+- Named exports, PascalCase components, 2-space indentation, no `any`. Add `"use client"` only where state or effects are needed.
