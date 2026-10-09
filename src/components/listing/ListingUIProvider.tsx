@@ -28,6 +28,10 @@ interface ListingUI {
   saved: boolean;
   toggleSaved: () => void;
   share: () => void;
+
+  /** Reserve confirmation: shows the "You won't be charged yet" note and toast. */
+  reserved: boolean;
+  reserve: () => void;
 }
 
 const ListingUIContext = createContext<ListingUI | null>(null);
@@ -52,6 +56,7 @@ export function ListingUIProvider({ children }: { children: ReactNode }) {
   const [amenitiesOpen, setAmenitiesOpen] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
+  const [reserved, setReserved] = useState(false);
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   // Elements that opened each overlay (LIFO), so focus can return to them on close. They are captured in
   // the open handlers, before the background is made inert (which would blur them).
@@ -137,8 +142,13 @@ export function ListingUIProvider({ children }: { children: ReactNode }) {
 
   const share = useCallback(() => {
     const failed = () => showToast("Couldn't copy link");
-    if (navigator.clipboard) navigator.clipboard.writeText(window.location.href).then(() => showToast("Link copied"), failed);
+    if (navigator.clipboard) navigator.clipboard.writeText(window.location.href).then(() => showToast("Share options"), failed);
     else failed();
+  }, [showToast]);
+
+  const reserve = useCallback(() => {
+    setReserved(true);
+    showToast("You won't be charged yet");
   }, [showToast]);
 
   // Lock page scroll while any overlay is open.
@@ -182,6 +192,8 @@ export function ListingUIProvider({ children }: { children: ReactNode }) {
       saved,
       toggleSaved,
       share,
+      reserved,
+      reserve,
     }),
     [
       tourOpen,
@@ -199,6 +211,8 @@ export function ListingUIProvider({ children }: { children: ReactNode }) {
       saved,
       toggleSaved,
       share,
+      reserved,
+      reserve,
     ],
   );
 

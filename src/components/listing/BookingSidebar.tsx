@@ -1,5 +1,8 @@
+"use client";
+
 import { ChevronDownIcon } from "@/components/listing/icons";
 import { IMG } from "@/components/listing/data";
+import { useListingUI } from "@/components/listing/ListingUIProvider";
 
 function FlagIcon() {
   return (
@@ -21,6 +24,7 @@ const label = "text-[10px] font-bold tracking-[.04em]";
 const value = "mt-[2px] text-[14px]";
 
 export function BookingSidebar() {
+  const { reserved, reserve } = useListingUI();
   return (
     <aside className="relative self-stretch max-[1128px]:hidden">
       <div className="sticky top-[100px]" id="bookingSticky">
@@ -29,9 +33,9 @@ export function BookingSidebar() {
           <div className="flex-1 text-[14px] leading-[1.3]">
             Get 10% off your next stay.
             <br />
-            <a href="#" className="font-medium underline">
+            <span className="font-medium underline">
               Terms apply
-            </a>
+            </span>
           </div>
           <button
             type="button"
@@ -72,19 +76,22 @@ export function BookingSidebar() {
           <button
             type="button"
             id="reserveBtn"
+            onClick={reserve}
             className="mt-[2px] h-12 w-full rounded-[999px] border-none bg-reserve px-6 py-0 text-[16px] leading-[normal] font-medium text-white [transition:filter_.15s,transform_.05s] hover:bg-reserve-hover active:[transform:scale(.985)]"
           >
             Reserve
           </button>
-          <div className="mt-4 text-center text-[14px] text-muted2">You won&apos;t be charged yet</div>
+          {reserved && (
+            <div className="mt-4 text-center text-[14px] text-muted2">You won&apos;t be charged yet</div>
+          )}
         </div>
         <div className="mt-[26px] flex items-center justify-center gap-2 text-[14px] text-muted2">
           <span className="h-4 w-4">
             <FlagIcon />
           </span>
-          <a href="#" className="underline">
+          <span className="underline">
             Report this listing
-          </a>
+          </span>
         </div>
       </div>
     </aside>

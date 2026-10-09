@@ -111,6 +111,11 @@ export const TOUR_ROOMS: TourRoom[] = [
   },
 ];
 
+/** Index in TOUR_ROOMS of the section that contains the given photo src. */
+export function roomIndexForPhoto(src: string): number {
+  return TOUR_ROOMS.findIndex((room) => room.rows.some((row) => row.photos.some((photo) => photo.src === src)));
+}
+
 /** Every tour photo in lightbox order, with the room it belongs to. */
 export const ALL_TOUR_PHOTOS = TOUR_ROOMS.flatMap((room) =>
   room.rows.flatMap((row) => row.photos.map((photo) => ({ ...photo, room: room.name }))),

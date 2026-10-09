@@ -1,7 +1,7 @@
 "use client";
 
 import { GridDotsIcon } from "@/components/listing/icons";
-import { HERO_PHOTOS, LISTING_TITLE } from "@/components/listing/data";
+import { HERO_PHOTOS, LISTING_TITLE, roomIndexForPhoto } from "@/components/listing/data";
 import { useListingUI } from "@/components/listing/ListingUIProvider";
 
 export function PhotoGallery() {
@@ -18,7 +18,7 @@ export function PhotoGallery() {
             key={src}
             type="button"
             aria-label={`${LISTING_TITLE} image ${i + 1}`}
-            onClick={() => openTour()}
+            onClick={() => openTour(roomIndexForPhoto(src))}
             className="relative block overflow-hidden border-none bg-[#eee] p-0 first:row-span-2 after:absolute after:inset-0 after:bg-[#0000] after:content-[''] after:[transition:background_.2s_ease] hover:after:bg-[#0000001a] active:[transform:scale(.997)] max-[743px]:not-first:hidden"
           >
             <img

@@ -3,6 +3,7 @@
 import { useEffect, useState, type MouseEvent } from "react";
 
 import { StarIcon } from "@/components/listing/icons";
+import { useListingUI } from "@/components/listing/ListingUIProvider";
 import { cn, scrollBehavior } from "@/lib/utils";
 
 const SECTIONS = [
@@ -18,6 +19,7 @@ const BAR_HEIGHT = 66;
 const SPY_OFFSET = 80;
 
 export function StickyNav() {
+  const { reserve } = useListingUI();
   const [visible, setVisible] = useState(false);
   const [active, setActive] = useState<SectionId>("photos");
 
@@ -94,7 +96,7 @@ export function StickyNav() {
           <button
             className="h-10 rounded-[999px] border-none bg-reserve px-5 text-[14px] leading-[normal] font-medium text-white transition-[filter,transform] duration-[.15s,.05s] hover:bg-reserve-hover active:[transform:scale(.985)]"
             type="button"
-            onClick={() => window.scrollTo({ top: 0, behavior: scrollBehavior() })}
+            onClick={reserve}
           >
             Reserve
           </button>
