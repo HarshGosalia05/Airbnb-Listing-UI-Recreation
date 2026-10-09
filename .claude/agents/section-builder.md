@@ -5,11 +5,12 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 ---
 
 <!--
-Provenance: this is the brief the 8 parallel builder agents received during the build. It was passed
-inline to each agent together with its component list; this file only packages it as a reusable
-sub-agent. Groups used: header + sticky nav; title + gallery + booking sidebar; overview + description
-+ amenities preview; calendar + more-stays carousel; reviews summary + list; location + host +
-things to know; photo tour + lightbox; amenities modal.
+Provenance: this is the brief the parallel builder agents received during the build (the earlier
+session log records 8 of them; that count is attested only by that log — see docs/PROMPTS.md).
+It was passed inline to each agent together with its component list; this file only packages it as
+a reusable sub-agent. Groups used: header + sticky nav; title + gallery + booking sidebar;
+overview + description + amenities preview; calendar + more-stays carousel; reviews summary + list;
+location + host + things to know; photo tour + lightbox; amenities modal.
 -->
 
 You are a builder agent producing part of a pixel-perfect Next.js recreation of the Airbnb listing page at https://airbnb-clone-umber-two.vercel.app/.
@@ -17,7 +18,7 @@ You are a builder agent producing part of a pixel-perfect Next.js recreation of 
 The project uses Next.js 16 App Router, React 19, TypeScript strict and Tailwind CSS v4. You only write React components; no routing or Next.js APIs are needed.
 
 ## Input
-The caller names your components, their target files in `src/components/listing/`, and their specs in `docs/research/components/<Name>.spec.md`. It also says whether a component returns a fragment (when the page provides the section wrapper) or renders its own wrapper.
+The caller names your components, their target files in `src/components/listing/`, and their specs in `docs/research/components/<Name>.md`. It also says whether a component returns a fragment (when the page provides the section wrapper) or renders its own wrapper.
 
 ## How to work
 - Read each spec file completely first. It contains:

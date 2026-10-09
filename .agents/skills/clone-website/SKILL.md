@@ -191,7 +191,7 @@ This is a dedicated pass AFTER screenshots and BEFORE anything else. Its purpose
 - Mobile: 390px
 - At each width, note which sections change layout (column → stack, sidebar disappears, etc.) and at approximately which breakpoint the change occurs.
 
-Save all findings to `<artifact-root>/BEHAVIORS.md`. This is your behavior bible — reference it when writing every component spec.
+Save all findings to `<artifact-root>/interaction-behaviors.md`. This is your behavior bible — reference it when writing every component spec.
 
 ### Page Topology
 Map out every distinct section of the page from top to bottom. Give each a working name. Document:
@@ -201,7 +201,7 @@ Map out every distinct section of the page from top to bottom. Give each a worki
 - Dependencies between sections (e.g., a floating nav that overlays everything)
 - **The interaction model** of each section (static, click-driven, scroll-driven, time-driven)
 
-Save this as `<artifact-root>/PAGE_TOPOLOGY.md` — it becomes your assembly blueprint.
+Save this as `<artifact-root>/page-structure.md` — it becomes your assembly blueprint.
 
 ## Phase 2: Foundation Build
 
@@ -331,7 +331,7 @@ Record the diff explicitly: "Property X changes from VALUE_A to VALUE_B, trigger
 
 For each section (or sub-component, if you're breaking it up), create a spec file inside the page's component-spec directory. This is NOT optional — every builder must have a corresponding spec file.
 
-**File path:** `docs/research/<site-key>/<page-key>/components/<component-name>.spec.md`
+**File path:** `docs/research/<site-key>/<page-key>/components/<component-name>.md`
 
 **Template:**
 
@@ -462,7 +462,7 @@ Only after this visual QA pass is the clone complete.
 
 Before dispatching ANY builder agent, verify you can check every box. If you can't, go back and extract more.
 
-- [ ] Spec file written to `docs/research/<site-key>/<page-key>/components/<name>.spec.md` with ALL sections filled
+- [ ] Spec file written to `docs/research/<site-key>/<page-key>/components/<name>.md` with ALL sections filled
 - [ ] Every CSS value in the spec is from `getComputedStyle()`, not estimated
 - [ ] Interaction model is identified and documented (static / click / scroll / time)
 - [ ] For stateful components: every state's content and styles are captured

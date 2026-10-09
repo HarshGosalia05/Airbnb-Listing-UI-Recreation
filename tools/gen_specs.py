@@ -229,5 +229,5 @@ for name, meta in NOTES.items():
 {c['html']}
 ```
 """
-    open(f'{SPEC_DIR}/{name}.spec.md', 'w', encoding='utf8', newline='\n').write(spec)
+    open(f'{SPEC_DIR}/{name}.md', 'w', encoding='utf8', newline='\n').write(spec)
     print(name, len(spec.splitlines()), 'lines', len(spec), 'chars')

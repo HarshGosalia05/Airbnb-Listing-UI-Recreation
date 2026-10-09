@@ -7,6 +7,8 @@
 
 **Health:** `npm run typecheck` and `npx eslint src` are clean. `npm run lint` fails with 24 `@typescript-eslint/no-require-imports` errors, all in `tools/*.js` and none in `src/`.
 
+> **Update (2026-10-09, project audit):** the health paragraph above describes the tree at review time. As of the audit, `npm run lint`, `npm run typecheck` and `npm run build` all exit 0 — the 24 lint errors were fixed in the pass recorded by the resolution table below. See `docs/reviews/project-audit.md` for the re-run results.
+
 ## High
 - **`globals.css` `:focus { outline: none }` removes every focus indicator,** and no component adds `focus-visible:` styles, so keyboard users can't see focus.
   - Fix: add a global `:focus-visible { outline: 2px solid #222; outline-offset: 2px }`, with an inset offset on rounded, clipped tiles.

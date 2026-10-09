@@ -3,7 +3,7 @@
 - **Route:** `/` (`src/app/page.tsx` → `src/components/listing/ListingPage.tsx`)
 - **Components:** `src/components/listing/` · **Images:** `public/images/listing/` · **Reference screenshots:** `docs/design-references/sections/`
 - **Query state:** `/?modal=PHOTO_TOUR_SCROLLABLE` is the same page with the photo tour overlay open (second saved capture). No separate route.
-- **Source:** the live site sits behind Vercel's bot checkpoint, so extraction used two SingleFile captures of the page (`docs/design-references/Romantic Jacuzzi ... (8：02：52 PM).html` and `(8：02：55 PM).html`), rendered locally in headless Chromium. The original is a hand-written static page (hashed class names, a single 26 KB stylesheet, vanilla JS that SingleFile stripped).
+- **Source:** the live site sits behind Vercel's bot checkpoint, so extraction used two SingleFile captures of the page (the normal page and the page with the photo tour open), rendered locally in headless Chromium. The captures themselves were never committed (≈16 MB each; see `tools/README.md`) — what remains in the repository are their derived outputs: the per-section screenshots in `docs/design-references/sections/`, the extracted assets and the specs in `docs/research/components/`. The original is a hand-written static page (hashed class names, a single 26 KB stylesheet, vanilla JS that SingleFile stripped).
 
 ## Layers (z-index)
 | Layer | Element | Position | z |

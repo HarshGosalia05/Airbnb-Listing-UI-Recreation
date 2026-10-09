@@ -1,0 +1,256 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1680" height="1260" viewBox="0 0 1680 1260" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
+  <defs>
+    <marker id="ar" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L9,4.5 L0,9 Z" fill="#64748B"/>
+    </marker>
+    <marker id="arStart" markerWidth="9" markerHeight="9" refX="1" refY="4.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M9,0 L0,4.5 L9,9 Z" fill="#64748B"/>
+    </marker>
+    <marker id="arD" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L9,4.5 L0,9 Z" fill="#D97706"/>
+    </marker>
+    <style>
+      .h1   { font-size:30px; font-weight:700; fill:#0F172A; }
+      .sub  { font-size:15px; fill:#475569; }
+      .chip { font-size:11px; font-weight:600; fill:#334155; letter-spacing:1.4px; text-anchor:middle; }
+      .bt   { font-size:15px; font-weight:600; fill:#0F172A; }
+      .bs   { font-size:12px; fill:#475569; }
+      .svc  { font-size:14px; font-weight:600; fill:#0F172A; }
+      .arr  { font-size:11px; font-weight:500; fill:#64748B; }
+      .note { font-size:12px; font-style:italic; fill:#64748B; }
+      .lg   { font-size:12px; fill:#475569; }
+      .tag  { font-size:10px; font-weight:700; fill:#FFFFFF; letter-spacing:0.8px; text-anchor:middle; }
+      .box  { fill:#FFFFFF; stroke:#334155; stroke-width:1.4; }
+    </style>
+  </defs>
+
+  <rect width="1680" height="1260" fill="#FFFFFF"/>
+
+  <!-- Title -->
+  <text class="h1" x="40" y="56">Vacation-rental marketplace — production architecture</text>
+  <text class="sub" x="40" y="86">Conceptual target for this assignment. Only the highlighted web-frontend slice exists in this repository; the rest is described in docs/ARCHITECTURE.md.</text>
+
+  <!-- ===== Layer chips ===== -->
+  <g>
+    <rect x="40" y="140" width="128" height="44" rx="6" fill="#F1F5F9" stroke="#CBD5E1"/>
+    <text class="chip" x="104" y="160">APPLICATION</text>
+    <text class="chip" x="104" y="176">CLIENTS</text>
+
+    <rect x="40" y="280" width="128" height="44" rx="6" fill="#F1F5F9" stroke="#CBD5E1"/>
+    <text class="chip" x="104" y="300">EDGE</text>
+    <text class="chip" x="104" y="316">&amp; CDN</text>
+
+    <rect x="40" y="404" width="128" height="44" rx="6" fill="#F1F5F9" stroke="#CBD5E1"/>
+    <text class="chip" x="104" y="424">API</text>
+    <text class="chip" x="104" y="440">GATEWAY</text>
+
+    <rect x="40" y="578" width="128" height="44" rx="6" fill="#F1F5F9" stroke="#CBD5E1"/>
+    <text class="chip" x="104" y="598">DOMAIN</text>
+    <text class="chip" x="104" y="614">SERVICES</text>
+
+    <rect x="40" y="752" width="128" height="44" rx="6" fill="#F1F5F9" stroke="#CBD5E1"/>
+    <text class="chip" x="104" y="772">ASYNC</text>
+    <text class="chip" x="104" y="788">EVENTS</text>
+
+    <rect x="40" y="905" width="128" height="44" rx="6" fill="#F1F5F9" stroke="#CBD5E1"/>
+    <text class="chip" x="104" y="925">DATA</text>
+    <text class="chip" x="104" y="941">&amp; STORAGE</text>
+
+    <rect x="40" y="1107" width="128" height="44" rx="6" fill="#F1F5F9" stroke="#CBD5E1"/>
+    <text class="chip" x="104" y="1127">PLATFORM</text>
+    <text class="chip" x="104" y="1143">&amp; OPS</text>
+  </g>
+
+  <!-- ===== Row 1: clients ===== -->
+  <g>
+    <rect x="210" y="110" width="448" height="104" rx="10" fill="#FFF1F3" stroke="#FF385C" stroke-width="2.4"/>
+    <text class="bt" x="226" y="138">Web application</text>
+    <text class="bs" x="226" y="164">Next.js App Router · SSR/ISR listing pages</text>
+    <text class="bs" x="226" y="186">Static route “/” — this is the implemented part</text>
+    <rect x="504" y="120" width="140" height="22" rx="11" fill="#FF385C"/>
+    <text class="tag" x="574" y="135">IMPLEMENTED HERE</text>
+
+    <rect x="691" y="110" width="448" height="104" rx="10" class="box"/>
+    <text class="bt" x="707" y="138">Guest mobile apps</text>
+    <text class="bs" x="707" y="164">iOS and Android clients over HTTPS; native</text>
+    <text class="bs" x="707" y="186">booking flows against the same public API</text>
+
+    <rect x="1172" y="110" width="448" height="104" rx="10" class="box"/>
+    <text class="bt" x="1188" y="138">Host &amp; partner tools</text>
+    <text class="bs" x="1188" y="164">Listing management, calendars, pricing rules</text>
+    <text class="bs" x="1188" y="186">and payout dashboards for hosts</text>
+  </g>
+
+  <!-- clients -> edge -->
+  <g stroke="#64748B" stroke-width="1.5">
+    <line x1="434" y1="216" x2="434" y2="248" marker-end="url(#ar)"/>
+    <line x1="915" y1="216" x2="915" y2="248" marker-end="url(#ar)"/>
+    <line x1="1396" y1="216" x2="1396" y2="248" marker-end="url(#ar)"/>
+  </g>
+  <text class="arr" x="928" y="240">HTTPS</text>
+
+  <!-- ===== Row 2: edge ===== -->
+  <g>
+    <rect x="210" y="252" width="1410" height="100" rx="10" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.4"/>
+    <text class="bt" x="226" y="280">Edge CDN &amp; WAF</text>
+    <text class="bs" x="226" y="306">TLS termination, DDoS protection, static assets. HTML and listing JSON are cached at the edge keyed by listing, locale and currency:</text>
+    <text class="bs" x="226" y="328">short TTL with stale-while-revalidate, immediate purge on content or price change. Only cache misses and API calls continue to the origin.</text>
+  </g>
+
+  <!-- edge -> gateway -->
+  <line x1="915" y1="356" x2="915" y2="374" stroke="#64748B" stroke-width="1.5" marker-end="url(#ar)"/>
+  <text class="arr" x="928" y="370">API calls</text>
+
+  <!-- ===== Row 3: API gateway ===== -->
+  <g>
+    <rect x="210" y="376" width="1410" height="100" rx="10" fill="#F5F3FF" stroke="#7C3AED" stroke-width="1.4"/>
+    <text class="bt" x="226" y="404">API gateway</text>
+    <text class="bs" x="226" y="430">Authentication and authorization (sessions, OAuth, JWT), rate limiting, request shaping and API versioning. Every domain service sits behind it —</text>
+    <text class="bs" x="226" y="452">clients never address a service directly, so policies and quotas are enforced once, in one place.</text>
+  </g>
+
+  <!-- gateway -> services bus -->
+  <g stroke="#64748B" stroke-width="1.5" fill="none">
+    <line x1="915" y1="476" x2="915" y2="488"/>
+    <line x1="375" y1="488" x2="1455" y2="488"/>
+    <line x1="375" y1="488" x2="375" y2="498" marker-end="url(#ar)"/>
+    <line x1="735" y1="488" x2="735" y2="498" marker-end="url(#ar)"/>
+    <line x1="1095" y1="488" x2="1095" y2="498" marker-end="url(#ar)"/>
+    <line x1="1455" y1="488" x2="1455" y2="498" marker-end="url(#ar)"/>
+  </g>
+  <text class="arr" x="1472" y="492">routed per service</text>
+
+  <!-- ===== Row 4: domain services ===== -->
+  <g>
+    <rect x="210" y="528" width="330" height="68" rx="10" class="box"/>
+    <text class="svc" x="226" y="553">Listings &amp; pricing</text>
+    <text class="bs" x="226" y="576">content, photos, rates, calendars</text>
+
+    <rect x="570" y="528" width="330" height="68" rx="10" class="box"/>
+    <text class="svc" x="586" y="553">Search</text>
+    <text class="bs" x="586" y="576">query, ranking, facets, geo</text>
+
+    <rect x="930" y="528" width="330" height="68" rx="10" class="box"/>
+    <text class="svc" x="946" y="553">Bookings &amp; availability</text>
+    <text class="bs" x="946" y="576">holds, reservations, confirmations</text>
+
+    <rect x="1290" y="528" width="330" height="68" rx="10" class="box"/>
+    <text class="svc" x="1306" y="553">Payments</text>
+    <text class="bs" x="1306" y="576">charges, refunds, payout ledger</text>
+
+    <rect x="210" y="620" width="330" height="68" rx="10" class="box"/>
+    <text class="svc" x="226" y="645">Auth &amp; accounts</text>
+    <text class="bs" x="226" y="668">identities, sessions, OAuth</text>
+
+    <rect x="570" y="620" width="330" height="68" rx="10" class="box"/>
+    <text class="svc" x="586" y="645">Reviews &amp; content</text>
+    <text class="bs" x="586" y="668">ratings, questions, reports</text>
+
+    <rect x="930" y="620" width="330" height="68" rx="10" class="box"/>
+    <text class="svc" x="946" y="645">Notifications</text>
+    <text class="bs" x="946" y="668">email, SMS, push fan-out</text>
+
+    <rect x="1290" y="620" width="330" height="68" rx="10" class="box"/>
+    <text class="svc" x="1306" y="645">Media &amp; imaging</text>
+    <text class="bs" x="1306" y="668">upload, scan, image derivatives</text>
+  </g>
+
+  <!-- services -> async (dashed) -->
+  <g stroke="#D97706" stroke-width="1.5" stroke-dasharray="6 4" fill="none">
+    <line x1="735" y1="700" x2="735" y2="722" marker-end="url(#arD)"/>
+    <line x1="1095" y1="700" x2="1095" y2="722" marker-end="url(#arD)"/>
+    <line x1="735" y1="708" x2="1095" y2="708"/>
+  </g>
+  <text class="arr" x="1112" y="716" fill="#B45309">async publish</text>
+
+  <!-- services <-> data side channels -->
+  <g stroke="#64748B" stroke-width="1.5" fill="none">
+    <line x1="375" y1="694" x2="375" y2="850" marker-end="url(#ar)" marker-start="url(#arStart)"/>
+    <line x1="1455" y1="694" x2="1455" y2="850" marker-end="url(#ar)" marker-start="url(#arStart)"/>
+  </g>
+  <text class="arr" x="360" y="775" text-anchor="middle" transform="rotate(-90 360 775)">reads &amp; writes</text>
+  <text class="arr" x="1472" y="775" text-anchor="middle" transform="rotate(-90 1472 775)">media blobs</text>
+
+  <!-- ===== Row 5: async bus ===== -->
+  <g>
+    <rect x="470" y="724" width="930" height="100" rx="10" fill="#FFFBEB" stroke="#D97706" stroke-width="1.4"/>
+    <text class="bt" x="486" y="752">Event bus (queue) with dead-letter topic</text>
+    <text class="bs" x="486" y="778">booking.confirmed · listing.updated · payment.captured · search.reindex · notify.* — published by one service, consumed by any others.</text>
+    <text class="bs" x="486" y="800">Retries with backoff and a dead-letter topic, so slow consumers never block a user request.</text>
+  </g>
+
+  <!-- async -> search index (dashed) -->
+  <line x1="1095" y1="826" x2="1095" y2="850" stroke="#D97706" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arD)"/>
+  <text class="arr" x="1108" y="844" fill="#B45309">index updates</text>
+
+  <!-- ===== Row 6: data & storage ===== -->
+  <g>
+    <rect x="210" y="852" width="262" height="150" rx="10" fill="#F0FDF4" stroke="#047857" stroke-width="1.4"/>
+    <text class="bt" x="224" y="878">Primary database</text>
+    <text class="bs" x="224" y="904">PostgreSQL — bookings,</text>
+    <text class="bs" x="224" y="924">inventory, users. Serializable</text>
+    <text class="bs" x="224" y="944">transactions plus idempotency</text>
+    <text class="bs" x="224" y="964">keys prevent double-booking.</text>
+
+    <rect x="497" y="852" width="262" height="150" rx="10" fill="#F0FDF4" stroke="#047857" stroke-width="1.4"/>
+    <text class="bt" x="511" y="878">Read replicas</text>
+    <text class="bs" x="511" y="904">Listing and reviews reads at</text>
+    <text class="bs" x="511" y="924">scale; replicas absorb the read</text>
+    <text class="bs" x="511" y="944">load in front of the primary.</text>
+
+    <rect x="784" y="852" width="262" height="150" rx="10" fill="#F0FDF4" stroke="#047857" stroke-width="1.4"/>
+    <text class="bt" x="798" y="878">Cache (Redis)</text>
+    <text class="bs" x="798" y="904">Hot listing JSON, sessions and</text>
+    <text class="bs" x="798" y="924">availability, with explicit</text>
+    <text class="bs" x="798" y="944">invalidation on every write.</text>
+
+    <rect x="1071" y="852" width="262" height="150" rx="10" fill="#F0FDF4" stroke="#047857" stroke-width="1.4"/>
+    <text class="bt" x="1085" y="878">Search index</text>
+    <text class="bs" x="1085" y="904">Elasticsearch / OpenSearch:</text>
+    <text class="bs" x="1085" y="924">geo and availability filters,</text>
+    <text class="bs" x="1085" y="944">ranking, facets. Falls back to</text>
+    <text class="bs" x="1085" y="964">SQL when the index is stale.</text>
+
+    <rect x="1358" y="852" width="262" height="150" rx="10" fill="#F0FDF4" stroke="#047857" stroke-width="1.4"/>
+    <text class="bt" x="1372" y="878">Object storage + CDN</text>
+    <text class="bs" x="1372" y="904">S3-compatible blobs and</text>
+    <text class="bs" x="1372" y="924">AVIF/WebP derivatives with</text>
+    <text class="bs" x="1372" y="944">immutable cache headers; the</text>
+    <text class="bs" x="1372" y="964">database stores only refs.</text>
+
+    <text class="note" x="210" y="1030">Read path: gateway → cache → replicas → primary. Write path: primary → invalidation → cache; domain events → queue → search index and notifications.</text>
+  </g>
+
+  <!-- ===== Row 7: platform & ops ===== -->
+  <g>
+    <rect x="210" y="1062" width="448" height="110" rx="10" fill="#F8FAFC" stroke="#64748B" stroke-width="1.4"/>
+    <text class="bt" x="226" y="1090">CI/CD</text>
+    <text class="bs" x="226" y="1116">lint → typecheck → tests → build → visual</text>
+    <text class="bs" x="226" y="1138">regression → staged rollout with a canary</text>
+
+    <rect x="691" y="1062" width="448" height="110" rx="10" fill="#F8FAFC" stroke="#64748B" stroke-width="1.4"/>
+    <text class="bt" x="707" y="1090">Observability</text>
+    <text class="bs" x="707" y="1116">Metrics, structured logs, distributed traces;</text>
+    <text class="bs" x="707" y="1138">SLOs on p95 latency and error rate</text>
+
+    <rect x="1172" y="1062" width="448" height="110" rx="10" fill="#F8FAFC" stroke="#64748B" stroke-width="1.4"/>
+    <text class="bt" x="1188" y="1090">Security &amp; config</text>
+    <text class="bs" x="1188" y="1116">Secrets, least-privilege service accounts,</text>
+    <text class="bs" x="1188" y="1138">audit logs, feature flags</text>
+  </g>
+
+  <!-- ===== Legend ===== -->
+  <g>
+    <line x1="210" y1="1216" x2="270" y2="1216" stroke="#64748B" stroke-width="1.5" marker-end="url(#ar)"/>
+    <text class="lg" x="282" y="1220">synchronous request / response</text>
+
+    <line x1="560" y1="1216" x2="620" y2="1216" stroke="#D97706" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arD)"/>
+    <text class="lg" x="632" y="1220">asynchronous event</text>
+
+    <rect x="860" y="1208" width="24" height="16" rx="3" fill="#FFF1F3" stroke="#FF385C" stroke-width="2"/>
+    <text class="lg" x="894" y="1220">implemented in this repository (web frontend only)</text>
+
+    <rect x="1310" y="1208" width="24" height="16" rx="3" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.4"/>
+    <text class="lg" x="1344" y="1220">conceptual target (not implemented)</text>
+  </g>
+</svg>
