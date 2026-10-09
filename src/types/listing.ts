@@ -1,4 +1,4 @@
-// Content contracts for the airbnb-clone-umber-two.vercel.app listing page clone.
+// Content contracts for the Airbnb listing page UI.
 
 export interface TourPhoto {
   /** Global index across the whole photo tour (used by the lightbox). */

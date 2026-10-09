@@ -8,9 +8,9 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
-# Airbnb Listing Clone — Agent Guide
+# Airbnb Listing UI Recreation — Agent Guide
 
-A single-page, pixel-accurate rebuild of an Airbnb listing ("Romantic Jacuzzi 1BHK Candolim | Mirashya UG10") in Next.js. The reference is https://airbnb-clone-umber-two.vercel.app/.
+A single-page, pixel-accurate recreation of an Airbnb listing ("Romantic Jacuzzi 1BHK Candolim | Mirashya UG10") in Next.js, by Harsh Gosalia. The design reference is https://airbnb-clone-umber-two.vercel.app/.
 
 ## Stack
 - Next.js 16 (App Router, Turbopack), React 19, TypeScript strict
@@ -33,7 +33,7 @@ A single-page, pixel-accurate rebuild of an Airbnb listing ("Romantic Jacuzzi 1B
 - `.claude/agents/section-builder.md`: build or rebuild components from their specs. Run several in parallel on disjoint files.
 - `.claude/agents/code-reviewer.md`: read-only review (correctness, structure, accessibility). Run it after changes.
 - `.claude/agents/visual-qa.md`: build, screenshot and pixel-diff against the reference, then check behaviours. Run it after any visual change.
-- `.agents/skills/clone-website/`: the cloning workflow skill (`/clone-website`) used to produce the first build.
+- `.agents/skills/clone-website/`: the site-reconstruction workflow skill (`/clone-website`) used to produce the first build.
 - `tools/`: the extraction and QA pipeline (see `tools/README.md`). Put scratch output in `tools/.out/` only.
 
 ## Accessibility rules

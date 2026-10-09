@@ -1,9 +1,9 @@
 {
-  "name": "airbnb-listing-clone",
+  "name": "airbnb-listing-ui-recreation",
   "version": "1.0.0",
   "private": true,
-  "description": "Pixel-accurate Airbnb listing page rebuilt in Next.js 16, React 19 and Tailwind CSS v4 with AI coding agents",
-  "author": "Bhautik-2004",
+  "description": "Airbnb listing page UI recreated in Next.js 16, React 19 and Tailwind CSS v4",
+  "author": "Harsh Gosalia",
   "license": "MIT",
   "engines": {
     "node": ">=24"

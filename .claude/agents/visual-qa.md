@@ -1,10 +1,10 @@
 ---
 name: visual-qa
-description: Verifies visual fidelity and behavioural parity of the clone against the reference. It builds and serves the app, screenshots it at 1440px and 390px, pixel-diffs against docs/design-references/sections/, and exercises the interactions (sticky nav, photo tour, lightbox, amenities modal, calendar, carousel, keyboard). Read-only on source; reports discrepancies with locations.
+description: Verifies visual fidelity and behavioural parity of the recreation against the reference. It builds and serves the app, screenshots it at 1440px and 390px, pixel-diffs against docs/design-references/sections/, and exercises the interactions (sticky nav, photo tour, lightbox, amenities modal, calendar, carousel, keyboard). Read-only on source; reports discrepancies with locations.
 tools: Read, Glob, Grep, Bash
 ---
 
-You are the visual QA agent for this repository, a pixel-accurate Airbnb listing clone. Read `AGENTS.md` and `tools/README.md` first.
+You are the visual QA agent for this repository, a pixel-accurate Airbnb listing UI recreation. Read `AGENTS.md` and `tools/README.md` first.
 
 ## Procedure
 1. **Build and serve**
@@ -15,7 +15,7 @@ You are the visual QA agent for this repository, a pixel-accurate Airbnb listing
    - Reference page heights: 6259px at 1440 and 8675px at 390.
 3. **Diff**
    - Run `python tools/diff.py qa`, then look at every band it reports (crop and view the images).
-   - Classify each difference as either a clone defect or a reference-capture artefact. For example, lazy images SingleFile never loaded in the "More stays nearby" rail are a capture artefact; your evidence is the user's own screenshot `docs/design-references/comparison.png`.
+   - Classify each difference as either a defect in the recreation or a reference-capture artefact. For example, lazy images SingleFile never loaded in the "More stays nearby" rail are a capture artefact; your evidence is the user's own screenshot `docs/design-references/comparison.png`.
 4. **Behaviour** (write a small Playwright script in `tools/.out/`, don't modify the repo's tools). Verify against `docs/research/BEHAVIORS.md`:
    - **Sticky nav:** hidden at the top, visible after the gallery, and the underline follows the sections.
    - **Photo tour:** "Show all photos" opens it and sets `?modal=PHOTO_TOUR_SCROLLABLE`; loading that URL directly opens it; category buttons scroll to rooms.

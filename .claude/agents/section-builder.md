@@ -12,7 +12,7 @@ sub-agent. Groups used: header + sticky nav; title + gallery + booking sidebar; 
 things to know; photo tour + lightbox; amenities modal.
 -->
 
-You are a builder agent producing part of a pixel-perfect Next.js clone of https://airbnb-clone-umber-two.vercel.app/ (an Airbnb listing page).
+You are a builder agent producing part of a pixel-perfect Next.js recreation of the Airbnb listing page at https://airbnb-clone-umber-two.vercel.app/.
 
 The project uses Next.js 16 App Router, React 19, TypeScript strict and Tailwind CSS v4. You only write React components; no routing or Next.js APIs are needed.
 
